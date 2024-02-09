@@ -9,6 +9,7 @@ namespace BowlingGameLib
     internal interface IFrame
     {
         bool IsFull { get; }
+        Score BonusScoreForSpare { get; }
 
         void Add(Pin pin);
         Score Score();

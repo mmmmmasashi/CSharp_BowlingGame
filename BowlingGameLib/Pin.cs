@@ -16,5 +16,10 @@ namespace BowlingGameLib
         }
 
         public int Num { get => _num; }
+
+        internal Score ToScore()
+        {
+            return new Score(this._num);
+        }
     }
 }

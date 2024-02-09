@@ -48,7 +48,7 @@ namespace BowlingGameLibTest
         }
 
         [Fact]
-        public void Spare()
+        public void Spare_BonusPinsIs2()
         {
             _game.Roll(new Pin(1));
             _game.Roll(new Pin(9));
@@ -60,5 +60,21 @@ namespace BowlingGameLibTest
 
             Assert.Equal(new Score(12 + 9), _game.Score());
         }
+
+
+        [Fact]
+        public void Spare_BonusPinsIs3()
+        {
+            _game.Roll(new Pin(1));
+            _game.Roll(new Pin(9));
+
+            _game.Roll(new Pin(3));
+            _game.Roll(new Pin(1));
+
+            RollMany(new Pin(0), 2 * 8);
+
+            Assert.Equal(new Score(13 + 4), _game.Score());
+        }
+
     }
 }

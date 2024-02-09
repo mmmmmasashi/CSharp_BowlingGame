@@ -4,11 +4,19 @@ namespace BowlingGameLib
 {
     public class Game
     {
-        private List<IFrame> _frames;
+        private IList<IFrame> _frames;
 
         public Game()
         {
-            _frames = Enumerable.Range(0, 10).Select(_ => (IFrame)new NormalFrame()).ToList();
+            var frames = new Queue<IFrame>();
+            frames.Enqueue(new FinalFrame());
+
+            for (int i = 0; i < 9; i++)
+            {
+                frames.Enqueue(new NormalFrame(frames.Last()));
+            }
+
+            _frames = frames.Reverse().ToArray();
         }
 
         public void Roll(Pin pin)
