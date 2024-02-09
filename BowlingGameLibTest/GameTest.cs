@@ -6,33 +6,33 @@ namespace BowlingGameLibTest
 {
     public class GameTest
     {
+        Game _game;
+
+        public GameTest()
+        {
+            _game = new Game();
+        }
+
+        private void RollMany(Pin pin, int times)
+        {
+            Enumerable.Repeat(pin, times).ToList().ForEach(pin => _game.Roll(pin));
+        }
+
         [Fact]
         public void AllGutter()
         {
-            var game = new Game();
-            for (var i = 0; i < 20; i++)
-            {
-                game.Roll(new Pin(0));
-            }
-
-            Assert.Equal(new Score(0), game.Score());
-
+            RollMany(new Pin(0), 20);
+            Assert.Equal(new Score(0), _game.Score());
         }
 
         [Fact]
         public void NoMark()
         {
-            var game = new Game();
-            game.Roll(new Pin(2));
-            game.Roll(new Pin(3));
+            _game.Roll(new Pin(2));
+            _game.Roll(new Pin(3));
 
-            for (int i = 0; i < 9; i++)
-            {
-                game.Roll(new Pin(0));
-                game.Roll(new Pin(0));
-            }
-
-            Assert.Equal(new Score(5), game.Score());
+            RollMany(new Pin(0), 2 * 9);
+            Assert.Equal(new Score(5), _game.Score());
         }
     }
 }
