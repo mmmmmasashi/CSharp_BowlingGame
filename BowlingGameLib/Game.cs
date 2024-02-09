@@ -1,10 +1,11 @@
 ﻿using BowlingGameLib.Frame;
+using System.Linq;
 
 namespace BowlingGameLib
 {
     public class Game
     {
-        private IList<IFrame> _frames;
+        private Frames _frames;
 
         public Game()
         {
@@ -16,18 +17,19 @@ namespace BowlingGameLib
                 frames.Enqueue(new NormalFrame(frames.Last()));
             }
 
-            _frames = frames.Reverse().ToArray();
+            _frames = new Frames(frames.Reverse().ToArray());
         }
 
         public void Roll(Pin pin)
         {
-            var currentFrame = _frames.First(frame => !frame.IsFull);
+            var currentFrame = _frames.SearchCurrentFrame();
             currentFrame.Add(pin);
         }
 
         public Score Score()
         {
-            return new Score(_frames.Select(frame => frame.Score()).Sum(score => score.Value));
+            var scores = _frames.ScoreEach();
+            return scores.Sum();
         }
     }
 }

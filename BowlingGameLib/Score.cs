@@ -37,4 +37,14 @@ namespace BowlingGameLib
             return new Score(_val + other.Value);
         }
     }
+
+    internal static class ScoresExtension
+    {
+        internal static Score Sum(this IEnumerable<Score> scores)
+        {
+            Score totalScore = new Score(0);
+            scores.ToList().ForEach(each => totalScore = totalScore.Add(each));
+            return totalScore;
+        }
+    }
 }
