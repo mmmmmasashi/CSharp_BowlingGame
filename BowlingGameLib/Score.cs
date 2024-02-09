@@ -31,5 +31,10 @@ namespace BowlingGameLib
         {
             return HashCode.Combine(_val);
         }
+
+        internal Score Add(Score other)
+        {
+            return new Score(_val + other.Value);
+        }
     }
 }

@@ -19,7 +19,20 @@ namespace BowlingGameLib.Frame
 
         public Score Score()
         {
+            Score basicScore = CalcBasicScore();
+            var bonusScore = CalcSpareBonus();
+            return basicScore.Add(bonusScore);
+        }
+
+        private Score CalcBasicScore()
+        {
             return new Score(_pins.Sum(pin => pin.Num));
+        }
+
+        private Score CalcSpareBonus()
+        {
+            if (CalcBasicScore().Equals(new Score(10))) return new Score(2);
+            return new Score(0);
         }
     }
 }

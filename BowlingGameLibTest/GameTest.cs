@@ -46,5 +46,19 @@ namespace BowlingGameLibTest
 
             Assert.Equal(new Score(3 * 10), _game.Score());
         }
+
+        [Fact]
+        public void Spare()
+        {
+            _game.Roll(new Pin(1));
+            _game.Roll(new Pin(9));
+
+            _game.Roll(new Pin(2));
+            _game.Roll(new Pin(7));
+
+            RollMany(new Pin(0), 2 * 8);
+
+            Assert.Equal(new Score(12 + 9), _game.Score());
+        }
     }
 }
