@@ -8,22 +8,23 @@ namespace BowlingGameLib.Frame
 {
     internal class NormalFrame : IFrame
     {
-        private List<Pin> _pins = new List<Pin>();
+        private PinCollection _pinCollection;
         private readonly IFrame _nextFrame;
 
         internal NormalFrame(IFrame nextFrame)
         {
+            _pinCollection = new PinCollection();
             _nextFrame = nextFrame;
         }
 
 
-        public bool IsFull => _pins.Count >= 2;
+        public bool IsFull => _pinCollection.Count() >= 2;//TODO:ストライク対応
 
-        public Score BonusScoreForSpare => _pins[0].ToScore();
+        public Score BonusScoreForSpare => _pinCollection.PinAt(0).ToScore();
 
         public void Add(Pin pin)
         {
-            _pins.Add(pin);
+            _pinCollection.Add(pin);
         }
 
         public Score Score()
@@ -35,7 +36,7 @@ namespace BowlingGameLib.Frame
 
         private Score CalcBasicScore()
         {
-            return new Score(_pins.Sum(pin => pin.Num));
+            return _pinCollection.Sum().ToScore();
         }
 
         private Score CalcSpareBonus()

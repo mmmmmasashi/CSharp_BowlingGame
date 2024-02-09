@@ -8,25 +8,25 @@ namespace BowlingGameLib.Frame
 {
     internal class FinalFrame : IFrame
     {
-        private List<Pin> _pins;
+        private PinCollection _pinCollection;
 
-        public FinalFrame()
+        internal FinalFrame()
         {
-            _pins = new List<Pin>();
+            _pinCollection = new PinCollection();
         }
 
-        public bool IsFull => _pins.Count() >= 2;//TODO:
+        public bool IsFull => _pinCollection.Count() >= 2;//TODO:
 
-        public Score BonusScoreForSpare => _pins.First().ToScore();//TODO:TEST追加
+        public Score BonusScoreForSpare => _pinCollection.PinAt(0).ToScore();//TODO:TEST追加
 
         public void Add(Pin pin)
         {
-            _pins.Add(pin);
+            _pinCollection.Add(pin);
         }
 
         public Score Score()
         {
-            return new Score(_pins.Sum(pin => pin.Num));
+            return _pinCollection.Sum().ToScore();
         }
     }
 }
