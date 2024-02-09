@@ -38,13 +38,4 @@ namespace BowlingGameLib
         }
     }
 
-    internal static class ScoresExtension
-    {
-        internal static Score Sum(this IEnumerable<Score> scores)
-        {
-            Score totalScore = new Score(0);
-            scores.ToList().ForEach(each => totalScore = totalScore.Add(each));
-            return totalScore;
-        }
-    }
 }

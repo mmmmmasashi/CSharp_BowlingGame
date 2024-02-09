@@ -14,14 +14,9 @@ namespace BowlingGameLib.Frame
             _frames = frames;
         }
 
-        internal Score ScoreAll()
+        internal Scores ToScores()
         {
-            return new Score(_frames.Select(frame => frame.Score()).Sum(score => score.Value));
-        }
-
-        internal IEnumerable<Score> ScoreEach()
-        {
-            return _frames.Select(frame => frame.Score());
+            return new Scores(_frames.Select(frame => frame.Score()));
         }
 
         internal IFrame SearchCurrentFrame()

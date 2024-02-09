@@ -28,7 +28,7 @@ namespace BowlingGameLib
 
         public Score Score()
         {
-            var scores = _frames.ScoreEach();
+            var scores = _frames.ToScores();
             return scores.Sum();
         }
     }
