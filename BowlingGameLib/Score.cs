@@ -15,6 +15,11 @@ namespace BowlingGameLib
             this._val = val;
         }
 
+        public override string ToString()
+        {
+            return $"Score : {_val}";
+        }
+
         public override bool Equals(object? obj)
         {
             return obj is Score score &&

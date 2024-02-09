@@ -14,5 +14,7 @@ namespace BowlingGameLib
         {
             this._num = num;
         }
+
+        public int Num { get => _num; }
     }
 }
