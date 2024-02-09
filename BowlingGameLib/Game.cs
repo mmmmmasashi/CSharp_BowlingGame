@@ -4,26 +4,22 @@ namespace BowlingGameLib
 {
     public class Game
     {
-        private IFrame _frame;
-        private int _ballCount;
+        private List<IFrame> _frames;
 
         public Game()
         {
-            _ballCount = 0;
-            _frame = new NormalFrame();
+            _frames = Enumerable.Range(0, 10).Select(_ => (IFrame)new NormalFrame()).ToList();
         }
 
         public void Roll(Pin pin)
         {
-            if (_ballCount >= 2) return;
-            _ballCount++;
-            _frame.Add(pin);
-
+            var currentFrame = _frames.First(frame => !frame.IsFull);
+            currentFrame.Add(pin);
         }
 
         public Score Score()
         {
-            return _frame.Score();
+            return new Score(_frames.Select(frame => frame.Score()).Sum(score => score.Value));
         }
     }
 }

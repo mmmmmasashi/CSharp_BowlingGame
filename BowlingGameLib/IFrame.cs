@@ -8,6 +8,8 @@ namespace BowlingGameLib
 {
     internal interface IFrame
     {
+        bool IsFull { get; }
+
         void Add(Pin pin);
         Score Score();
     }

@@ -9,6 +9,7 @@ namespace BowlingGameLib
     public class Score
     {
         private int _val;
+        public int Value { get => _val; }
 
         public Score(int val)
         {

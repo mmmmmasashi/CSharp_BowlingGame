@@ -10,6 +10,7 @@ namespace BowlingGameLib.Frame
     {
         private List<Pin> _pins = new List<Pin>();
 
+        public bool IsFull => _pins.Count >= 2;
 
         public void Add(Pin pin)
         {

@@ -34,5 +34,17 @@ namespace BowlingGameLibTest
             RollMany(new Pin(0), 2 * 9);
             Assert.Equal(new Score(5), _game.Score());
         }
+
+        [Fact]
+        public void NoMark_10Frames()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _game.Roll(new Pin(1));
+                _game.Roll(new Pin(2));
+            }
+
+            Assert.Equal(new Score(3 * 10), _game.Score());
+        }
     }
 }
